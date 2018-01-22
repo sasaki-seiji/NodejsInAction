@@ -75,18 +75,23 @@
 
 （環境）
 
-node, npm：
+node, npm：(2018.01.22)
 	参考：https://qiita.com/seibe/items/36cef7df85fe2cefa3ea
 			「Ubuntuに最新のNode.jsを難なくインストールする」
+	参考：https://www.trifields.jp/how-to-install-node-js-on-ubuntu1604-2680
+			「Ubuntu16.04で任意のバージョンのNode.jsをインストールする方法」
 	コマンド：
 		$ sudo apt-get install -y nodejs npm
 		$ sudo npm cache clean
 		$ sudo npm install n -g
 		$ sudo n stable
+		$ node -v
 		$ sudo ln -sf /usr/local/bin/node /usr/bin/node
+		$ sudo n lts
 		$ node -v
 	バージョン：
-		v9.4.0
+		v8.9.4
+
 
 MySQL:
 	ダウンロードページ；	https://dev.mysql.com/downloads/
