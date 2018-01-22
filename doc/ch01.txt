@@ -7,3 +7,8 @@
 
 ・プログラム(2018.01.22)：　helloworld.js, helloworld2.js
 
+【1.5.3:データのストリーミング】
+
+・ファイルのストリーム読み出し(2018.01.22)：　readstream.js
+・画像ストリームをresにpipe接続（2018.01.22）：　stream-image.js
+
