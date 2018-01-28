@@ -1,61 +1,29 @@
-【2.2.4:アプリケーションの依存関係をインストールする】
+【2.3.1:基礎的な静的ファイルサーバーを作る】
 
-インストールされたモジュールとバージョンは以下
-+-- mime@1.2.11
-`-- socket.io@0.9.19
+・mime.lookup()がエラーとなる（2018.01.28）
+
+　mimelookup()によりmimeタイプを取得する箇所で以下のエラーが出る
+　
+	$ node server.js
+	Server listening on port 3000.
+	/home/sasaki/books/NodejsInAction/ch02/chat/server.js:16
+		{'Content-type': mime.lookup(path.basename(filePath))});
+		                      ^
+
+	TypeError: mime.lookup is not a function
+	    at sendFile (/home/sasaki/books/NodejsInAction/ch02/chat/server.js:16:25)
+	    at /home/sasaki/books/NodejsInAction/ch02/chat/server.js:34:7
+	    at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:511:3)
+
+（原因と対策：　https://www.npmjs.com/package/mime）
+
+　mime v2からAPIが変更となっている
+
+	Version 2 is a breaking change from 1.x as the semver implies. Specifically:
+
+    lookup() renamed to getType()
+    extension() renamed to getExtension()
+    charset() and load() methods have been removed
 
 
-【chatAppをazureへデプロイ】
-
-・プログラムの修正
-
-①process.env.PORTのポートを使用
-
-	var port = process.env.PORT || 3000;
-		・・・
-	server.listen(port, function() {
-		console.log("Server listening on port:" + port);
-	});
-
-②package.jsonに起動スクリプトを追記
-
-  "scripts": {
-    "start": "node server.js"
-  }
-
-
-・azure設定、リソース
-
-デプロイユーザ：	username:deployuser2017、password:sophia2008
-リソースグループ:	nodejsInActionGroup	(東日本)
-App Serviceプラン：	nodejsInActionPlan	(FREE)
-Webアプリ：			chatapp20171110
-	サイト：		http://chatapp20171110.azurewebsites.net
-GitリモートURL:		https://deployuser2017@chatapp20171110.scm.azurewebsites.net/chatapp20171110.git
-WEBSITE_NODE_DEFAULT_VERSION=6.11.2
-webソケット：		オン
-
-・コマンド
-
-az login
-
-az group create --name nodejsInActionGroup --location "Japan East"
-az appservice plan create --name nodejsInActionPlan --resource-group nodejsInActionGroup --sku FREE
-
-az webapp create --name chatapp20171110 --resource-group nodejsInActionGroup --plan nodejsInActionPlan --deployment-local-git
-
-az webapp config appsettings set --name chatapp20171110 --resource-group nodejsInActionGroup --settings WEBSITE_NODE_DEFAULT_VERSION=6.11.2
-(portalからwebソケットをオン)
-
-az webapp deployment source config-local-git --name chatapp20171110 --resource-group nodejsInActionGroup --query url --output tsv
-⇒
-	https://deployuser2017@chatapp20171110.scm.azurewebsites.net/chatapp20171110.git
-
-(以下は、コマンドプロンプトから実施）
-git init
-git add .
-git commit -m "initial commit"
-
-git remote add azure https://deployuser2017@chatapp20171110.scm.azurewebsites.net/chatapp20171110.git
-git push azure master
 

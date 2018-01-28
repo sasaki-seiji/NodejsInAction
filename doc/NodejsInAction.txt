@@ -6,6 +6,9 @@
 ・Node.js v8.9.2 Documentation
 	https://nodejs.org/docs/latest-v8.x/api/index.html
 
+・mime
+	https://www.npmjs.com/package/mime
+
 ・Express4.16.1
 　Fast, unopinionated, minimalist web framework for Node.js 
 	http://expressjs.com/

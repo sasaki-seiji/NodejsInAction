@@ -2,18 +2,20 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
-var mine = require('mime');
+var mime = require('mime');
 var cache = {};
 
 function send404(response) {
 	response.writeHead(404, {'Content-type': 'text/plain'});
-	response.write('Error 4040: resource not found.');
+	response.write('Error 404: resource not found.');
 	response.end();
 }
 
 function sendFile(response, filePath, fileContents) {
 	response.writeHead(200, 
-		{'Content-type': mime.lookup(path.basename(filePath))});
+// 2018.01.28 change
+//		{'Content-type': mime.lookup(path.basename(filePath))});
+		{'Content-type': mime.getType(path.basename(filePath))});
 	response.end(fileContents);
 }
 
@@ -36,6 +38,9 @@ function serveStatic(response, cache, absPath) {
 				});
 			}
 			else {
+				// debug
+				console.log('not found: ', absPath);
+				
 				send404(response);
 			}
 		});
