@@ -1,0 +1,23 @@
+{
+  "name": "chatrooms",
+  "version": "1.0.0",
+  "description": "Minimalist nultiroom chat server",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "websocket",
+    "node"
+  ],
+  "author": "sasaki-seiji",
+  "license": "ISC",
+  "dependencies": {
+    "mime": "^2.2.0",
+    "socket.io": "^2.0.4"
+  }
+}

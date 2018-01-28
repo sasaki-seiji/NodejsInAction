@@ -1,0 +1,61 @@
+【2.2.4:アプリケーションの依存関係をインストールする】
+
+インストールされたモジュールとバージョンは以下
++-- mime@1.2.11
+`-- socket.io@0.9.19
+
+
+【chatAppをazureへデプロイ】
+
+・プログラムの修正
+
+①process.env.PORTのポートを使用
+
+	var port = process.env.PORT || 3000;
+		・・・
+	server.listen(port, function() {
+		console.log("Server listening on port:" + port);
+	});
+
+②package.jsonに起動スクリプトを追記
+
+  "scripts": {
+    "start": "node server.js"
+  }
+
+
+・azure設定、リソース
+
+デプロイユーザ：	username:deployuser2017、password:sophia2008
+リソースグループ:	nodejsInActionGroup	(東日本)
+App Serviceプラン：	nodejsInActionPlan	(FREE)
+Webアプリ：			chatapp20171110
+	サイト：		http://chatapp20171110.azurewebsites.net
+GitリモートURL:		https://deployuser2017@chatapp20171110.scm.azurewebsites.net/chatapp20171110.git
+WEBSITE_NODE_DEFAULT_VERSION=6.11.2
+webソケット：		オン
+
+・コマンド
+
+az login
+
+az group create --name nodejsInActionGroup --location "Japan East"
+az appservice plan create --name nodejsInActionPlan --resource-group nodejsInActionGroup --sku FREE
+
+az webapp create --name chatapp20171110 --resource-group nodejsInActionGroup --plan nodejsInActionPlan --deployment-local-git
+
+az webapp config appsettings set --name chatapp20171110 --resource-group nodejsInActionGroup --settings WEBSITE_NODE_DEFAULT_VERSION=6.11.2
+(portalからwebソケットをオン)
+
+az webapp deployment source config-local-git --name chatapp20171110 --resource-group nodejsInActionGroup --query url --output tsv
+⇒
+	https://deployuser2017@chatapp20171110.scm.azurewebsites.net/chatapp20171110.git
+
+(以下は、コマンドプロンプトから実施）
+git init
+git add .
+git commit -m "initial commit"
+
+git remote add azure https://deployuser2017@chatapp20171110.scm.azurewebsites.net/chatapp20171110.git
+git push azure master
+
