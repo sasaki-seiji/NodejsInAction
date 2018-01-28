@@ -26,4 +26,33 @@
     charset() and load() methods have been removed
 
 
+【2.4.2:アプリケーションのシナリオとイベントに対処する】
+
+・io.sockets.clients(room)がエラーとなる（2018.01.28）
+
+　io.sockets.clients(room)の呼び出し位置で以下のエラーが発生
+　
+$ node server.js
+Option log level is not valid. Please refer to the README.
+Server listening on port 3000.
+/home/sasaki/books/NodejsInAction/ch02/chat/node_modules/socket.io-adapter/index.js:210
+  if (fn) process.nextTick(fn.bind(null, null, sids));
+                              ^
+
+TypeError: fn.bind is not a function
+    at Adapter.clients (/home/sasaki/books/NodejsInAction/ch02/chat/node_modules/socket.io-adapter/index.js:210:31)
+    at Namespace.clients (/home/sasaki/books/NodejsInAction/ch02/chat/node_modules/socket.io/lib/namespace.js:261:16)
+    at joinRoom (/home/sasaki/books/NodejsInAction/ch02/chat/lib/chat_server.js:63:31)
+    at Namespace.<anonymous> (/home/sasaki/books/NodejsInAction/ch02/chat/lib/chat_server.js:19:3)
+
+（原因と対策）
+　参考：https://stackoverflow.com/questions/33373176/typeerror-io-sockets-clients-is-not-a-function
+　
+　
+	socket.io v1.0+では、io.sockets.clients(room)は動作しない
+	代わりに、以下を使う
+
+	var clientsList = io.sockets.adapter.rooms[room];
+	var numClients = clientsList.length;
+
 

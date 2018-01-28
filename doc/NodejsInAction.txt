@@ -6,6 +6,9 @@
 ・Node.js v8.9.2 Documentation
 	https://nodejs.org/docs/latest-v8.x/api/index.html
 
+・socket.io
+	https://socket.io/docs/#
+
 ・mime
 	https://www.npmjs.com/package/mime
 
@@ -116,8 +119,10 @@ Redis
 
 第2章　マルチルーム・チャットアプリケーションの構築
 
-2017.11.06	2.1:アプリケーションの概要、2.2:アプリケーションの要件と初期設定
+2018.01.28
+			2.1:アプリケーションの概要、2.2:アプリケーションの要件と初期設定
 			2.3:HTML、CSS、クライアントサイドJavaScriptを提供する
+＠＠＠＠＠　ここまで　＠＠＠＠＠＠
 2017.11.08、2017.11.09
 			2.4:チャット関係のメッセージンぐをSocket.IOで処理する
 			2.5:アプリケーションのUIにはクライアントサイドJavaScriptを使う
