@@ -24,8 +24,17 @@ exports.listen = function(server) {
 		
 		handleRoomJoining(socket);
 		
-		socket.on('room', function() {
-			socket.emit('rooms', io.sockets.manager.rooms);
+		socket.on('rooms', function() {
+			// debug
+//			console.log('io.sockets.adapter.rooms: ', io.sockets.adapter.rooms);
+
+// 2018.01.29 change
+//			socket.emit('rooms', io.sockets.manager.rooms);
+			var rooms = {}; // rooms table
+			for (id in currentRoom) {
+				rooms[currentRoom[id]] = true;
+			}
+			socket.emit('rooms', rooms);
 		});
 		
 		handleClientDisconnection(socket, nickNames, namesUsed);
@@ -60,10 +69,10 @@ function joinRoom(socket, room) {
 		text: nickNames[socket.id] + ' has joined ' + room + '.'
 	});
 
-	// 2018.01.28 change	
-	//var usersInRoom = io.sockets.clients(room);
-	var usersInRoom = io.sockets.adapter.rooms[room];
-	
+	// 2018.01.29 change
+/*		
+	var usersInRoom = io.sockets.clients(room);
+		
 	if (usersInRoom.length > 1) {
 		var usersInRoomSummary = 'Users currently in ' + room + ': ';
 		for (var index in usersInRoom) {
@@ -75,6 +84,22 @@ function joinRoom(socket, room) {
 				usersInRoomSummary += nickNames[userSocketId];
 			}
 		}
+		usersInRoomSummary +=  '.';
+		socket.emit('message', {text: usersInRoomSummary});
+	}
+*/
+	var usersInRoomSummary = 'Users currently in ' + room + ': ';
+	var count = 0;
+	for (var id in currentRoom) {
+		if (id != socket.id && currentRoom[id] == room) {
+			if (count > 0) {
+				usersInRoomSummary += ', ';
+			}
+			usersInRoomSummary += nickNames[id];
+			count++;
+		}
+	}
+	if (count > 0) {
 		usersInRoomSummary +=  '.';
 		socket.emit('message', {text: usersInRoomSummary});
 	}
@@ -90,7 +115,7 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 			});
 		}
 		else {
-			if (namesUsed.indexof(name) == -1) {
+			if (namesUsed.indexOf(name) == -1) {
 				var previousName = nickNames[socket.id];
 				var previousNameIndex = namesUsed.indexOf(previousName);
 				namesUsed.push(name);
@@ -118,7 +143,7 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 function handleMessageBroadcasting(socket) {
 	socket.on('message', function(message) {
 		socket.broadcast.to(message.room).emit('message', {
-			text: nickNames[socket.id] + ': ' + message.txt
+			text: nickNames[socket.id] + ': ' + message.text
 		});
 	});
 }

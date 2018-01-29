@@ -45,14 +45,75 @@ TypeError: fn.bind is not a function
     at joinRoom (/home/sasaki/books/NodejsInAction/ch02/chat/lib/chat_server.js:63:31)
     at Namespace.<anonymous> (/home/sasaki/books/NodejsInAction/ch02/chat/lib/chat_server.js:19:3)
 
-（原因と対策）
+（原因と対策：2018.01.29）
+
 　参考：https://stackoverflow.com/questions/33373176/typeerror-io-sockets-clients-is-not-a-function
 　
 　
 	socket.io v1.0+では、io.sockets.clients(room)は動作しない
-	代わりに、以下を使う
+	代わりに、currentRoomを使って同様なことをこなう
 
-	var clientsList = io.sockets.adapter.rooms[room];
-	var numClients = clientsList.length;
+	var usersInRoomSummary = 'Users currently in ' + room + ': ';
+	var count = 0;
+	for (var id in currentRoom) {
+		if (id != socket.id && currentRoom[id] == room) {
+			if (count > 0) {
+				usersInRoomSummary += ', ';
+			}
+			usersInRoomSummary += nickNames[id];
+			count++;
+		}
+	}
+	if (count > 0) {
+		usersInRoomSummary +=  '.';
+		socket.emit('message', {text: usersInRoomSummary});
+	}
+
+
+・io.sockets.manager.roomsがエラーとなる（2018.01.29）
+
+　以下のエラーが発生
+　
+$ node server.js
+Option log level is not valid. Please refer to the README.
+Server listening on port 3000.
+usersInRoom:  Room { sockets: { '4zBfjAl1GoVcmjRiAAAA': true }, length: 1 }
+/home/sasaki/books/NodejsInAction/ch02/chat/lib/chat_server.js:30
+			socket.emit('rooms', io.sockets.manager.rooms);
+			                                        ^
+
+TypeError: Cannot read property 'rooms' of undefined
+    at Socket.<anonymous> (/home/sasaki/books/NodejsInAction/ch02/chat/lib/chat_server.js:30:44)
+    at emitNone (events.js:106:13)
+    at Socket.emit (events.js:208:7)
+    at /home/sasaki/books/NodejsInAction/ch02/chat/node_modules/socket.io/lib/socket.js:513:12
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+
+（原因と対策）
+
+　io.sockets.managerがサポートされなくなったので、代わりにcurrentRoom
+　を使って、同様なことを行う
+　
+　lib/chat_server.js
+　
+	　// 2018.01.29 change
+		//socket.emit('rooms', io.sockets.manager.rooms);
+			var rooms = {}; // rooms table
+			for (id in currentRoom) {
+				rooms[currentRoom[id]] = true;
+			}
+			socket.emit('rooms', rooms);
+　
+　public/javascripts/chat_ui.js
+　
+　		$('#room-list').empty();
+		for(var room in rooms) {
+			// 2018.01.29 delete
+			//room = room.substring(1, room.length);
+			if (room != '') {
+				$('#room-list').append(divEscapedContentElement(room));
+			}
+		}
 
 
