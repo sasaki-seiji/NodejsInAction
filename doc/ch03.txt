@@ -1,0 +1,72 @@
+【3.2.2:繰り返すイベントをイベントエミッタで処理する】
+
+日付：2018.02.03
+コメント：
+	subpub.jsにおいて、net.createServerのコールバック関数内で、
+	client.on('connect')イベントが発火しない
+	（コールバック関数が呼ばれた時点で、connectされていると思われる）
+
+＠＠＠＠　ここまで　＠＠＠＠
+
+【3.3.1:シリアルフロー制御をどんな時使うか】
+
+日付：2017.11.14
+・nimbleのインストール
+npm install nimble
+-- nimble@0.0.2
+
+【3.3.2:シリアルフロー制御を実装する】
+
+・requestとhtmlparserのインストール（2017.11.14）
+
+npm install request
+-- request@2.83.0
+npm install htmlparser
+-- htmlparser@1.7.7
+
+・コメント（2017.11.15）
+
+RSS　http://rss.slashdot.org/Slashdot/slashdot　に対しては以下のエラーが出る
+
+  	if (!handler.dom.items.length)
+                        ^
+	TypeError: Cannot read property 'length' of undefined
+	
+RSS　http://dave.smallpict.com/rss.xml　に対しては、
+.title属性のアクセスでundefinedエラーが出る
+
+	undefined
+	http://scripting.com/2017/11/14.html#a162210
+	
+⇒　これに対しては、以下のようにロジックを変更した
+
+	// 2017.11.15 change
+	/*
+		if (!handler.dom.items.length)
+		    return next(new Error('No RSS items found'));
+		var item = handler.dom.items.shift();
+		console.log(item.title);
+		console.log(item.link);
+	*/
+		for (var index in handler.dom.items) {
+			var item = handler.dom.items[index];
+			if (item.title) {
+				console.log('tille: ' + item.title);
+				console.log('link: ' + item.link);
+			}
+		}
+
+
+【3.3.4:フロー制御ツールを利用する】
+
+・tarのインストール（2017.11.15)
+
+「GnuWin Packages」ページ（http://gnuwin32.sourceforge.net/packages.html）
+から、tarをインストールして、pathを設定（C:\Program Files (x86)\GnuWin32\bin）
+
+・nimbleのインストール（2017.11.15)
+
+npm install nimble
+-- nimble@0.0.2
+
+
