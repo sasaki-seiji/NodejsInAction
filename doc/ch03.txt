@@ -23,20 +23,4 @@
 	http://dave.smallpict.com/rss.xml
 	に対しては、title、link属性を取得できない
 	（代わりに、id、desription属性を表示するように変更した）
-	
-＠＠＠＠　ここまで　＠＠＠＠
-
-
-【3.3.4:フロー制御ツールを利用する】
-
-・tarのインストール（2017.11.15)
-
-「GnuWin Packages」ページ（http://gnuwin32.sourceforge.net/packages.html）
-から、tarをインストールして、pathを設定（C:\Program Files (x86)\GnuWin32\bin）
-
-・nimbleのインストール（2017.11.15)
-
-npm install nimble
--- nimble@0.0.2
-
 
