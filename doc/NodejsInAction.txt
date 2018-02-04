@@ -12,6 +12,13 @@
 ・mime
 	https://www.npmjs.com/package/mime
 
+・request
+	https://github.com/request/request
+
+・htmlparser
+	https://github.com/maierfelix/htmlparse#readme
+  https://github.com/tautologistics/node-htmlparser
+  
 ・Express4.16.1
 　Fast, unopinionated, minimalist web framework for Node.js 
 	http://expressjs.com/

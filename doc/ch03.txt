@@ -6,55 +6,25 @@
 	client.on('connect')イベントが発火しない
 	（コールバック関数が呼ばれた時点で、connectされていると思われる）
 
-＠＠＠＠　ここまで　＠＠＠＠
-
-【3.3.1:シリアルフロー制御をどんな時使うか】
-
-日付：2017.11.14
-・nimbleのインストール
-npm install nimble
--- nimble@0.0.2
 
 【3.3.2:シリアルフロー制御を実装する】
 
-・requestとhtmlparserのインストール（2017.11.14）
+・htmlparserの代わりにhtmlparser2を使用（2018.02.03）
 
-npm install request
--- request@2.83.0
-npm install htmlparser
--- htmlparser@1.7.7
+　htmlparserモジュールがメンテされていないので、代わりに
+　htmlparser2を使用
 
-・コメント（2017.11.15）
+・RSShandlerの処理が失敗する、title、link属性を取得できない（2018.02.24）
 
-RSS　http://rss.slashdot.org/Slashdot/slashdot　に対しては以下のエラーが出る
-
-  	if (!handler.dom.items.length)
-                        ^
-	TypeError: Cannot read property 'length' of undefined
+　http://rss.slashdot.org/Slashdot/slashdot
+	に対しては、RSShandlerが失敗する。
 	
-RSS　http://dave.smallpict.com/rss.xml　に対しては、
-.title属性のアクセスでundefinedエラーが出る
-
-	undefined
-	http://scripting.com/2017/11/14.html#a162210
+	http://scripting.com/rss.xml
+	http://dave.smallpict.com/rss.xml
+	に対しては、title、link属性を取得できない
+	（代わりに、id、desription属性を表示するように変更した）
 	
-⇒　これに対しては、以下のようにロジックを変更した
-
-	// 2017.11.15 change
-	/*
-		if (!handler.dom.items.length)
-		    return next(new Error('No RSS items found'));
-		var item = handler.dom.items.shift();
-		console.log(item.title);
-		console.log(item.link);
-	*/
-		for (var index in handler.dom.items) {
-			var item = handler.dom.items[index];
-			if (item.title) {
-				console.log('tille: ' + item.title);
-				console.log('link: ' + item.link);
-			}
-		}
+＠＠＠＠　ここまで　＠＠＠＠
 
 
 【3.3.4:フロー制御ツールを利用する】

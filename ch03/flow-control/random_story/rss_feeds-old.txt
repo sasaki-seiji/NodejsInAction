@@ -1,0 +1,4 @@
+http://rss.slashdot.org/Slashdot/slashdot
+http://scripting.com/rss.xml
+http://dave.smallpict.com/rss.xml
+

@@ -1,0 +1,20 @@
+{
+  "name": "random_story",
+  "version": "1.0.0",
+  "description": "select random story from RSS feed",
+  "main": "random_story.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "RSS-feed",
+    "serial-flow-control"
+  ],
+  "author": "sasaki-seiji",
+  "license": "ISC",
+  "dependencies": {
+    "htmlparser": "^1.7.7",
+    "htmlparser2": "^3.9.2",
+    "request": "^2.83.0"
+  }
+}
