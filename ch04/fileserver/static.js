@@ -8,22 +8,36 @@ var root = __dirname;
 var server = http.createServer(function(req, res){
 	var url = parse(req.url);
 	var path = join(__dirname, url.pathname);
-	var stream = fs.createReadStream(path);
 	
-/* 4.3.1: optimize data transfer using Stream#pipe()
-	stream.on('data', function(chunk){
-		res.write(chunk);
+	fs.stat(path, function(err, stat){
+		if (err) {
+			if ('ENOENT' == err.code) {
+				res.statusCode = 404;
+				res.end('Not Found');
+				console.log('Not Found');
+			}
+			else {
+				res.statusCode = 500;
+				res.end('Internal Server Error');
+				console.log('Internal Server Error');
+			}
+		}
+		else {
+			res.setHeader('Content-Length', stat.size);
+			
+			var stream = fs.createReadStream(path);
+			stream.pipe(res);
+			stream.on('error', function(err) {
+				res.statusCode = 500;
+				// 2018.02.07 add
+				var mes = 'Internal Server Error'; 
+				res.setHeader('Content-Length', Buffer.byteLength(mes));
+				res.end(mes);
+				console.log(mes);
+			});
+		}
 	});
-	stream.on('end', function(){
-		res.end();
-	});
-*/
-	stream.pipe(res);
-	// 4.3.2: handle server error
-	stream.on('error', function(err) {
-		res.statusCode = 500;
-		res.end('Internal Server Error');
-	});
+	
 	
 });
 
