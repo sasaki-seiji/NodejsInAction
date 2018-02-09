@@ -18,7 +18,10 @@
 ・htmlparser
 	https://github.com/maierfelix/htmlparse#readme
   https://github.com/tautologistics/node-htmlparser
-  
+
+・formidable
+	https://github.com/felixge/node-formidable
+
 ・Express4.16.1
 　Fast, unopinionated, minimalist web framework for Node.js 
 	http://expressjs.com/
