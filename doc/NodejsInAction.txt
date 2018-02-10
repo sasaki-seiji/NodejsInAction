@@ -22,6 +22,9 @@
 ・formidable
 	https://github.com/felixge/node-formidable
 
+・mysql
+  https://github.com/mysqljs/mysql#readme
+
 ・Express4.16.1
 　Fast, unopinionated, minimalist web framework for Node.js 
 	http://expressjs.com/

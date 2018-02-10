@@ -75,7 +75,7 @@ exports.show = function(db, res, showArchived) {
     function(err, rows) {
       if (err) throw err;
       html = (showArchived)
-        ? ''
+        ? '<a href="/">Non Archived Work</a><br/>' // 2018.02.11 add
         : '<a href="/archived">Archived Work</a><br/>';
       html += exports.workHitlistHtml(rows); 
       html += exports.workFormHtml();
