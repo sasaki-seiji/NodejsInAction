@@ -109,10 +109,52 @@ node, npm：(2018.01.22)
 		v8.9.4
 
 
-MySQL:
-	ダウンロードページ；	https://dev.mysql.com/downloads/
-	バージョン： 			5.7.20
-	インストールフォルダ：	C:\Program Files\MySQL
+MySQL:(2018.02.10)
+  参考：　http://ksino.hatenablog.com/entry/2016/11/17/232619
+  バージョン：5.7.21
+  コマンド：
+    $ sudo apt update
+    $ sudo apt install mysql-server mysql-client
+    $ mysql -u root -p
+    Enter password: 
+
+    mysql> create database timetrack;
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    | sys                |
+    | timetrack          |
+    +--------------------+
+    5 rows in set (0.00 sec)
+
+    mysql> grant all on timetrack.* to 'myuser' identified by 'mypassword';
+
+    mysql> quit
+    Bye
+
+    $ mysql -u myuser -p
+    Enter password: 
+
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | timetrack          |
+    +--------------------+
+    2 rows in set (0.00 sec)
+
+    mysql> connect timetrack;
+    Connection id:    6
+    Current database: timetrack
+
+    mysql> quit
+    Bye
+
 	
 Redis
 	ダウンロードページ：	https://github.com/MicrosoftArchive/redis/releases
@@ -155,11 +197,10 @@ Redis
 
 第5章　アプリケーションのデータをストアする
 
-2018.01.10	5.1:サーバーレスデータストレージ
+2018.02.10	5.1:サーバーレスデータストレージ
+2018.02.10  5.2:リレーショナルデータベース管理システム
+			(5.2.1:まで)
 ＠＠＠＠＠　ここまで　＠＠＠＠＠＠
-2017.11.19、2017.11.20、2017.11.21、2017.11.22
-			5.2:リレーショナルデータベース管理システム
-			(5.2.2:PostreSQL はスキップ)
 2017.11.23、2017.11.24、2017.11.25、2017.11.26
 			5.3:NoSQLデータベース
 2017.11.28、2017.11.29

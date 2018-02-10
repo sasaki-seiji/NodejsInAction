@@ -1,0 +1,20 @@
+{
+  "name": "timetrack",
+  "version": "1.0.0",
+  "description": "timetrack application using mysql",
+  "main": "timetrack_server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mysql"
+  ],
+  "author": "sasaki-seiji",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.15.0"
+  }
+}
