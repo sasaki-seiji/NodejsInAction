@@ -12,6 +12,7 @@
   "author": "sasaki-seiji",
   "license": "ISC",
   "dependencies": {
+    "hiredis": "^0.5.0",
     "redis": "^2.8.0"
   }
 }
