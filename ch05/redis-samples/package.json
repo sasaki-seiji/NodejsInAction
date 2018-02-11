@@ -1,0 +1,17 @@
+{
+  "name": "redis-samples",
+  "version": "1.0.0",
+  "description": "redis samples",
+  "main": "redis_basics.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "redis"
+  ],
+  "author": "sasaki-seiji",
+  "license": "ISC",
+  "dependencies": {
+    "redis": "^2.8.0"
+  }
+}

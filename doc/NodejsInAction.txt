@@ -25,6 +25,9 @@
 ・mysql
   https://github.com/mysqljs/mysql#readme
 
+・redis
+  https://github.com/NodeRedis/node_redis
+
 ・Express4.16.1
 　Fast, unopinionated, minimalist web framework for Node.js 
 	http://expressjs.com/
@@ -160,9 +163,17 @@ MySQL:(2018.02.10)
 
 	
 Redis
-	ダウンロードページ：	https://github.com/MicrosoftArchive/redis/releases
-	バージョン				3.2.100
-	インストールフォルダ	C:\Program Files\Redis\
+  参考：
+    https://weblabo.oscasierra.net/redis-ubuntu1604-install-apt/
+    http://linuxserver.jp/%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89/db/nosql/redis/redis-server-on-ubuntu
+    https://www.server-world.info/query?os=Ubuntu_16.04&p=redis
+  コマンド：
+    $ sudo apt show redis-server
+    $ sudo apt install redis-server
+    $ redis-cli --version
+    redis-cli 3.0.6
+    $ redis-server --version
+    Redis server v=3.0.6 sha=00000000:0 malloc=jemalloc-3.6.0 bits=64 build=687a2a319020fa42
 
 
 （履歴）
