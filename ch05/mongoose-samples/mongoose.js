@@ -26,6 +26,9 @@ task.save(function(err) {
 		  console.log('ID:' + tasks[i]._id);
 		  console.log(tasks[i].description);
 		}
+		
+		// 2018.02.12 add
+		mongoose.disconnect();
 	});
 });
 
