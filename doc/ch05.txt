@@ -57,39 +57,9 @@ TypeError: Cannot read property '_id' of undefined
       {"title": "I like cake"},
 
 
-＠＠＠＠＠＠＠＠＠＠＠　ここまで　＠＠＠＠＠＠＠＠＠＠＠
-
 【5.3.3:Mongoose】
 
-（mongooseのインストール：2017.11.26）
+（ドキュメントの検索のタイミング：2018.02.12）
 
-	npm install mongoose --save
-	-- mongoose@4.13.5
-
-
-(mongoose_sampleをazure上のMongoDBに接続：2017.12.03)
-
-≪mongodb≫
-
-ID					mongodb20171203
-API					MongoDB
-リソースグループ	nodejsInActionGroup
-場所				東日本
-
-≪接続文字列≫
-
-host				mongodb20171203.documents.azure.com
-port				10255
-username			mongodb20171203
-primary password	z85ZBw2lzJyARQ3LsRr97kNUerqrlgnMNRCg6Ad7bcSQswzCCs1OLoOX6hQ7D7dvF1y7p6D46MlBfSlh0XX8SQ==
-primary connectin string
-					mongodb://mongodb20171203:z85ZBw2lzJyARQ3LsRr97kNUerqrlgnMNRCg6Ad7bcSQswzCCs1OLoOX6hQ7D7dvF1y7p6D46MlBfSlh0XX8SQ==@mongodb20171203.documents.azure.com:10255/?ssl=true&replicaSet=globaldb
-SSL					true
-
-≪mongoクライアントからアクセス≫
-
-以下のコマンドでアクセス可能
-
-mongo --ssl --host mongodb20171203:z85ZBw2lzJyARQ3LsRr97kNUerqrlgnMNRCg6Ad7bcSQswzCCs1OLoOX6hQ7D7dvF1y7p6D46MlBfSlh0XX8SQ==@mongodb20171203.documents.azure.com  --port 10255
-
-
+　テキストのコード例：mongoose.jsでは、ドキュメントの保存の完了の前に、
+　検索のコードが走る。
