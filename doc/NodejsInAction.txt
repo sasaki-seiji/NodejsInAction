@@ -33,7 +33,10 @@
 		https://mongodb.github.io/node-mongodb-native/
 	Quick Start:
 		http://mongodb.github.io/node-mongodb-native/3.0/quick-start/quick-start/
-	
+
+・mongoose
+	http://mongoosejs.com/	
+
 ・Express4.16.1
 　Fast, unopinionated, minimalist web framework for Node.js 
 	http://expressjs.com/

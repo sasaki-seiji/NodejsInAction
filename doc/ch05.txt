@@ -63,3 +63,32 @@ TypeError: Cannot read property '_id' of undefined
 
 　テキストのコード例：mongoose.jsでは、ドキュメントの保存の完了の前に、
 　検索のコードが走る。
+　
+
+（Task#removeコールが失敗：2018.02.12）
+
+　テキストのコード例に従って、Task#remove()を呼び出すと、以下のエラーが出る
+　　
+		$ node mongoose-remove.jsevents.js:183
+				  throw er; // Unhandled 'error' event
+				  ^
+
+		TypeError: task.remove is not a function
+				at /home/sasaki/books/NodejsInAction/ch05/mongoose-samples/mongoose-remove.js:16:8
+				at model.Query.<anonymous> (/home/sasaki/books/NodejsInAction/ch05/mongoose-samples/node_modules/mongoose/lib/model.js:3928:16)
+				at /home/sasaki/books/NodejsInAction/ch05/mongoose-samples/node_modules/kareem/index.js:297:21
+				at /home/sasaki/books/NodejsInAction/ch05/mongoose-samples/node_modules/kareem/index.js:135:16
+				at _combinedTickCallback (internal/process/next_tick.js:131:7)
+				at process._tickCallback (internal/process/next_tick.js:180:9)
+　
+　以下のように修正
+　　
+		Task.remove(
+			{'project': 'Bikeshed'},
+			function(err) {
+				if (err) throw err;
+				console.log('remove all');
+				mongoose.disconnect();
+			}
+		);
+
