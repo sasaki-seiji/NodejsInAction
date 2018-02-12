@@ -28,6 +28,12 @@
 ・redis
   https://github.com/NodeRedis/node_redis
 
+・mongoDB
+	MongoDB Node.JS Driver:
+		https://mongodb.github.io/node-mongodb-native/
+	Quick Start:
+		http://mongodb.github.io/node-mongodb-native/3.0/quick-start/quick-start/
+	
 ・Express4.16.1
 　Fast, unopinionated, minimalist web framework for Node.js 
 	http://expressjs.com/
@@ -98,10 +104,12 @@
 （環境）
 
 node, npm：(2018.01.22)
+
 	参考：https://qiita.com/seibe/items/36cef7df85fe2cefa3ea
 			「Ubuntuに最新のNode.jsを難なくインストールする」
 	参考：https://www.trifields.jp/how-to-install-node-js-on-ubuntu1604-2680
 			「Ubuntu16.04で任意のバージョンのNode.jsをインストールする方法」
+
 	コマンド：
 		$ sudo apt-get install -y nodejs npm
 		$ sudo npm cache clean
@@ -116,7 +124,9 @@ node, npm：(2018.01.22)
 
 
 MySQL:(2018.02.10)
+
   参考：　http://ksino.hatenablog.com/entry/2016/11/17/232619
+
   バージョン：5.7.21
   コマンド：
     $ sudo apt update
@@ -163,10 +173,12 @@ MySQL:(2018.02.10)
 
 	
 Redis
+
   参考：
     https://weblabo.oscasierra.net/redis-ubuntu1604-install-apt/
     http://linuxserver.jp/%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89/db/nosql/redis/redis-server-on-ubuntu
     https://www.server-world.info/query?os=Ubuntu_16.04&p=redis
+
   コマンド：
     $ sudo apt show redis-server
     $ sudo apt install redis-server
@@ -174,6 +186,20 @@ Redis
     redis-cli 3.0.6
     $ redis-server --version
     Redis server v=3.0.6 sha=00000000:0 malloc=jemalloc-3.6.0 bits=64 build=687a2a319020fa42
+
+
+MongoDB
+	参考：
+		https://www.trifields.jp/how-to-install-mongodb-on-ubuntu-2751
+
+	コマンド：
+		$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+		$ echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+		$ sudo apt-get update
+		$ sudo apt-get install mongodb-org
+		$ sudo service mongod start
+		$ mongo
+		$ sudo service mongod stop
 
 
 （履歴）
@@ -214,12 +240,9 @@ Redis
 2018.02.10	5.1:サーバーレスデータストレージ
 2018.02.10  5.2:リレーショナルデータベース管理システム
 			(5.2.2:PostgreSQLは省略)
-2018.02.11	5.3:NoSQLデータベース(5.1.1 まで)
+2018.02.11、2018.02.12
+						5.3:NoSQLデータベース(5.1.2 まで)
 ＠＠＠＠＠　ここまで　＠＠＠＠＠＠
-2017.11.28、2017.11.29
-			timetrackをazureにデプロイ（web+mysql）
-2017.11.30	redis_basics.jsのredisをazureにデプロイ
-2017.12.03	monogo_sample, mongoose_sampleのMongoDBをazureにデプロイ
 
 第6章　Connect
 

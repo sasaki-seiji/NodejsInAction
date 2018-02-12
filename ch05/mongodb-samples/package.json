@@ -1,0 +1,17 @@
+{
+  "name": "mongodb-samples",
+  "version": "1.0.0",
+  "description": "mongoDB samples",
+  "main": "mongo_insert.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongoDB"
+  ],
+  "author": "sasaki-seiji",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.0.2"
+  }
+}

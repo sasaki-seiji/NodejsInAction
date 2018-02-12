@@ -1,0 +1,95 @@
+【5.3.2:MongoDB】
+
+（MongoDBへの接続：2018.02.12）
+
+・参考：
+	http://mongodb.github.io/node-mongodb-native/3.0/quick-start/quick-start/
+
+　テキストのコード例が古くMongoDBに接続することができない	
+　以下のように変更
+　
+		var MongoClient = require('mongodb').MongoClient;
+		var url = 'mongodb://localhost:27017';
+		var dbName = 'mydatabase';
+
+		MongoClient.connect(url, function(err, client) {
+			if (err) throw err;
+			console.log('Connected successfully to server');
+
+			var db = client.db(dbName);
+			db.collection('test_insert', function(err, 	collection) {
+					・・・ここに処理内容を書く
+			});
+		});
+
+
+（collection#insertのコールバック内でエラー：2017.11.25)
+
+・テキストのinsertの例題で、以下のエラーが出る
+
+TypeError: Cannot read property '_id' of undefined
+
+・(原因）Node.js MongoDB Driver API ドキュメントによると、
+コール関数の引数の仕様がテキストと異なっている
+以下のように変更すると、所望の結果が得られる
+
+        //console.log('Document ID is: ' + documents[0]._id);
+        console.log('Document ID is: ' + documents.insertedIds);
+
+（ObjectIDの作成でエラー：2017.11.25）
+
+・テキストの以下のコード箇所でエラーが出る
+
+    var _id = new client.bson_serializer .ObjectID('4e650d344ac74b5a01000001');
+⇒
+	TypeError: Cannot read property 'ObjectID' of undefined
+
+・(原因)ObjectIDのモジュール構成が変更となっている
+以下のように修正
+
+	var ObjectID = require('bson/lib/bson/objectid');
+    var _id = new ObjectID('4e650d344ac74b5a01000001');
+    console.log(_id);
+
+・(対策）ObjectIDによる検索をやめて、updateの条件部を以下のように変更
+
+      //{_id: _id},
+      {"title": "I like cake"},
+
+
+＠＠＠＠＠＠＠＠＠＠＠　ここまで　＠＠＠＠＠＠＠＠＠＠＠
+
+【5.3.3:Mongoose】
+
+（mongooseのインストール：2017.11.26）
+
+	npm install mongoose --save
+	-- mongoose@4.13.5
+
+
+(mongoose_sampleをazure上のMongoDBに接続：2017.12.03)
+
+≪mongodb≫
+
+ID					mongodb20171203
+API					MongoDB
+リソースグループ	nodejsInActionGroup
+場所				東日本
+
+≪接続文字列≫
+
+host				mongodb20171203.documents.azure.com
+port				10255
+username			mongodb20171203
+primary password	z85ZBw2lzJyARQ3LsRr97kNUerqrlgnMNRCg6Ad7bcSQswzCCs1OLoOX6hQ7D7dvF1y7p6D46MlBfSlh0XX8SQ==
+primary connectin string
+					mongodb://mongodb20171203:z85ZBw2lzJyARQ3LsRr97kNUerqrlgnMNRCg6Ad7bcSQswzCCs1OLoOX6hQ7D7dvF1y7p6D46MlBfSlh0XX8SQ==@mongodb20171203.documents.azure.com:10255/?ssl=true&replicaSet=globaldb
+SSL					true
+
+≪mongoクライアントからアクセス≫
+
+以下のコマンドでアクセス可能
+
+mongo --ssl --host mongodb20171203:z85ZBw2lzJyARQ3LsRr97kNUerqrlgnMNRCg6Ad7bcSQswzCCs1OLoOX6hQ7D7dvF1y7p6D46MlBfSlh0XX8SQ==@mongodb20171203.documents.azure.com  --port 10255
+
+
